@@ -74,8 +74,7 @@
                 <socket-binding native="management-native"/>
             </native-interface>
             <http-interface>
-                <!-- JA Bride:   changing to http to avoid need to port-forward 9990 -->
-                <socket-binding http="http"/>
+                <socket-binding http="management-http"/>
             </http-interface>
         </management-interfaces>
     </management>
