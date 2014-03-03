@@ -129,3 +129,4 @@ Endpoints:
     Private-Port: 9990
 Additional-Control-Actions:
     - threaddump
+Source-Url: https://github.com/jboss-gpe-ose/openshift-origin-cartridge-fsw-full/archive/master.zip

@@ -26,12 +26,12 @@ Install of FSW cartridge
             rhc app delete -a bpms
 
     4)  Create the *full* FSW6 *full* OSE application :
-            rhc create-app bpms "http://cartreflect-claytondev.rhcloud.com/reflect?github=jboss-gpe-ose/openshift-origin-cartridge-bpms-full&commit=master" -g medium
+        rhc create-app fswtest https://raw.github.com/jboss-gpe-ose/openshift-origin-cartridge-bpms-full/master/metadata/manifest.yml -g int_dev_medium
 
     5)  Add mysql cartridge:
-            rhc cartridge add -a bpms -c mysql-5.1
+        rhc cartridge add -a fswtest -c mysql-5.1
 
-    6)  restart app:  rhc cartridge-restart bpms -a bpms
+    6)  restart app:  rhc cartridge-restart bpms -a fswtest
         - after several minutes, should expect to see the following as the last line in $HOME/bpms/standalone/log/server.log :
 
             [org.jboss.as.server] (DeploymentScanner-threads - 1) JBAS018559: Deployed "dashbuilder.war" (runtime-name : "dashbuilder.war")
