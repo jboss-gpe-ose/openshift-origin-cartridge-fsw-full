@@ -285,6 +285,7 @@ function deploy() {
             echo "fsw database already exists"
         else
             #     NOTE:  not sure why can't connect to mysql host while in this start block without having to specify host details
+            client_message "start():  fsw database does not exist.  will now create fsw database and populate"
             mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/fswfull.sql
 
             mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/safe-guard-procedures.MySQL5InnoDBDialect.sql
