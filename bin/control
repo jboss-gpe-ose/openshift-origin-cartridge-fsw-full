@@ -281,8 +281,8 @@ function deploy() {
     if ! isdbup; then
         echo "Timed out waiting for database listener port ... will use H2"
     else
-        if [ -d $OPENSHIFT_MYSQL_DIR/data/jbpm ] ; then
-            echo "jbpm database already exists"
+        if [ -d $OPENSHIFT_MYSQL_DIR/data/fsw ] ; then
+            echo "fsw database already exists"
         else
             #     NOTE:  not sure why can't connect to mysql host while in this start block without having to specify host details
             mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/fswfull.sql
