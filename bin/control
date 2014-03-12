@@ -17,6 +17,7 @@ source $FSW_BIN_DIR/util
 
 cartridge_type="jbosseap"
 version=6.0
+sqldir=$OPENSHIFT_FSW_DIR/version/$version
 
 # Return the deployment-scanner configuration
 function getscanconfig() {
@@ -284,21 +285,21 @@ function deploy() {
         if [ -d $OPENSHIFT_MYSQL_DIR/data/fsw ] ; then
             echo "fsw database already exists"
         else
-            #     NOTE:  not sure why can't connect to mysql host while in this start block without having to specify host details
-            client_message "start():  fsw database does not exist.  will now create fsw database and populate"
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p mysql -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/fswfull.sql
+          #     NOTE:  not sure why can't connect to mysql host while in this start block without having to specify host details
+          client_message "start():  fsw database does not exist.  will now create fsw database and populate"
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p mysql -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/fswfull.sql
 
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/safe-guard-procedures.MySQL5InnoDBDialect.sql
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/jbpm-test.org.jbpm.persistence.jpa.MySQL5InnoDBDialect.sql
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/hibernate_sequence.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/safe-guard-procedures.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/jbpm-test.org.jbpm.persistence.jpa.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/hibernate_sequence.MySQL5InnoDBDialect.sql
 
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/gadget-web.gadget-core.MySQL5InnoDBDialect.sql
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/overlord-rtgov.overlord-rtgov-activity.MySQL5InnoDBDialect.sql
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/overlord-rtgov-epn.overlord-rtgov-epn.MySQL5InnoDBDialect.sql
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/rtgov.MySQL5InnoDBDialect.sql
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/import_rtgov.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/gadget-web.gadget-core.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/overlord-rtgov.overlord-rtgov-activity.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/overlord-rtgov-epn.overlord-rtgov-epn.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/rtgov.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/import_rtgov.MySQL5InnoDBDialect.sql
 
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/riftsaw-dao-jpa.ode-scheduler.MySQL5InnoDBDialect.sql
+          mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/riftsaw-dao-jpa.ode-bpel.MySQL5InnoDBDialect.sql
         fi
 
     fi
