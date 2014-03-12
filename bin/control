@@ -17,7 +17,7 @@ source $FSW_BIN_DIR/util
 
 cartridge_type="jbosseap"
 version=6.0
-sqldir=$OPENSHIFT_FSW_DIR/version/$version
+sqldir=$OPENSHIFT_FSW_DIR/versions/$version
 
 # Return the deployment-scanner configuration
 function getscanconfig() {
