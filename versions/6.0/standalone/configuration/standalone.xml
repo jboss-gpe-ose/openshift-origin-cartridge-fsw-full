@@ -119,7 +119,6 @@
         <subsystem xmlns="urn:jboss:domain:configadmin:1.0" />
         <subsystem xmlns="urn:jboss:domain:datasources:1.1">
             <datasources>
-                <drivers>
 
                     <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
                         <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</connection-url>
@@ -142,12 +141,16 @@
                         </validation>
                     </datasource>
 
-
+                <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource
                         </xa-datasource-class>
                     </driver>
+                    <driver name="mysql" module="com.mysql.jdbc">
+                        <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+                    </driver>
                 </drivers>
+
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
