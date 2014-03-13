@@ -336,6 +336,8 @@ function deploy() {
     cp -r $OS_BPEL_SERVER_PATH $FSW_DEPLOYMENTS_DIR
 
     cp -r $OS_BPEL_PATH $FSW_DEPLOYMENTS_DIR
+
+    startFSWwebs
 }
 
 function startFSWwebs() {
