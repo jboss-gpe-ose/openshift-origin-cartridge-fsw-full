@@ -426,7 +426,40 @@
                         <policy-module code="Delegating" flag="required"/>
                     </authorization>
                 </security-domain>
+                <security-domain name="bpel-console" cache-type="default">
+                    <authentication>
+                        <login-module code="UsersRoles" flag="required"/>
+                    </authentication>
+                </security-domain>
+                <security-domain name="overlord-idp" cache-type="default">
+                    <authentication>
+                        <login-module code="RealmDirect" flag="required">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+                <security-domain name="overlord-sp" cache-type="default">
+                    <authentication>
+                        <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule" flag="required"/>
+                    </authentication>
+                </security-domain>
+                <security-domain name="overlord-jaxrs" cache-type="default">
+                    <authentication>
+                        <login-module code="org.overlord.commons.auth.jboss7.SAMLBearerTokenLoginModule" flag="sufficient">
+                            <module-option name="allowedIssuers" value="/s-ramp-ui,/dtgov,/dtgov-ui,/gadget-web,/bpel-console"/>
+                            <module-option name="signatureRequired" value="true"/>
+                            <module-option name="keystorePath" value="${jboss.server.config.dir}/overlord-saml.keystore"/>
+                            <module-option name="keystorePassword" value="${VAULT::vault::saml-keystore.password::1}"/>
+                            <module-option name="keyAlias" value="overlord"/>
+                            <module-option name="keyPassword" value="${VAULT::overlord::overlord-alias.password::1}"/>
+                        </login-module>
+                        <login-module code="RealmDirect" flag="required">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
             </security-domains>
+
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:threads:1.1" />
         <subsystem xmlns="urn:jboss:domain:transactions:1.2">
