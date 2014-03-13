@@ -137,6 +137,18 @@
                             <password>sa</password>
                         </security>
                     </datasource>
+                    <datasource jndi-name="java:jboss/datasources/jbpmDS" pool-name="jbpmDS" enabled="true">
+                        <connection-url>jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:3306/fsw?transformedBitIsBoolean=true&amp;sessionVariables=storage_engine=InnoDB</connection-url>
+                        <driver>mysql</driver>
+                        <security>
+                            <user-name>${env.OPENSHIFT_MYSQL_DB_USERNAME}</user-name>
+                            <password>${env.OPENSHIFT_MYSQL_DB_PASSWORD}</password>
+                        </security>
+                        <validation>
+                            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+                            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+                        </validation>
+                    </datasource>
                     <datasource jndi-name="java:jboss/datasources/srampDS" pool-name="srampDS" enabled="true">
                         <connection-url>jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:3306/fsw?transformedBitIsBoolean=true&amp;sessionVariables=storage_engine=InnoDB</connection-url>
                         <driver>mysql</driver>
