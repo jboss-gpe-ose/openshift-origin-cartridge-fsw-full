@@ -456,7 +456,7 @@
                         <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule" flag="required"/>
                     </authentication>
                 </security-domain>
-                <security-domain name="overlord-jaxrs" cache-type="default">
+                <!--security-domain name="overlord-jaxrs" cache-type="default">
                     <authentication>
                         <login-module code="org.overlord.commons.auth.jboss7.SAMLBearerTokenLoginModule" flag="sufficient">
                             <module-option name="allowedIssuers" value="/s-ramp-ui,/dtgov,/dtgov-ui,/gadget-web,/bpel-console"/>
@@ -470,7 +470,7 @@
                             <module-option name="password-stacking" value="useFirstPass"/>
                         </login-module>
                     </authentication>
-                </security-domain>
+                </security-domain -->
             </security-domains>
 
         </subsystem>

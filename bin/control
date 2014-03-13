@@ -320,8 +320,8 @@ function deploy() {
     cp -r $OS_SRAMP_SERVER_PATH $FSW_DEPLOYMENTS_DIR
     echo > $FSW_DEPLOYMENTS_DIR/s-ramp-server.war.dodeploy
 
-    cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
-    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
+    #cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
+    #echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
 
 }
 
