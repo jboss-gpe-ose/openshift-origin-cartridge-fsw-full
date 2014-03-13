@@ -302,6 +302,10 @@ function deploy() {
           mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/riftsaw-dao-jpa.ode-bpel.MySQL5InnoDBDialect.sql
         fi
 
+        # 4)  execute mysql related modifications to jboss
+        replace_mysql_envs
+        $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/mysql-add.cli
+
     fi
 
 
