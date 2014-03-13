@@ -321,20 +321,24 @@ function deploy() {
 
     # 6) copy s-ramp web apps from it's original RPM'd location
     cp -r $OS_OVERLORD_COMMONS_PATH $FSW_DEPLOYMENTS_DIR
-    echo > $FSW_DEPLOYMENTS_DIR/overlord-commons-idp.war.dodeploy
 
     cp -r $OS_SRAMP_SERVER_PATH $FSW_DEPLOYMENTS_DIR
-    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-server.war.dodeploy
 
     cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
-    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
 
     cp -r $OS_DTGOV_PATH $FSW_DEPLOYMENTS_DIR
-    echo > $FSW_DEPLOYMENTS_DIR/dtgov.war.dodeploy
 
     cp -r $OS_DTGOV_UI_PATH $FSW_DEPLOYMENTS_DIR
-    echo > $FSW_DEPLOYMENTS_DIR/dtgov-ui.war.dodeploy
 
+
+}
+
+function startFSWwebs() {
+    echo > $FSW_DEPLOYMENTS_DIR/overlord-commons-idp.war.dodeploy
+    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-server.war.dodeploy
+    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
+    echo > $FSW_DEPLOYMENTS_DIR/dtgov.war.dodeploy
+    echo > $FSW_DEPLOYMENTS_DIR/dtgov-ui.war.dodeploy
 }
 
 function replace_mysql_envs() {
@@ -476,12 +480,12 @@ function threaddump() {
 export OPENSHIFT_SECRET_TOKEN=${OPENSHIFT_SECRET_TOKEN:-OPENSHIFT_APP_UUID}
 
 case "$1" in
-    build|start|stop|restart|status|reload|tidy|threaddump|update-configuration)
+    build|start|stop|restart|status|reload|tidy|threaddump|update-configuration|startFSWwebs)
         $1
         ;;
     *)
 
-    echo $"Usage: $0 {build|start|stop|restart|status|reload|tidy|threaddump|update-configuration}"
+    echo $"Usage: $0 {build|start|stop|restart|status|reload|tidy|threaddump|update-configuration|startFSWwebs}"
     exit 1
 esac
 
