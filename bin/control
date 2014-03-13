@@ -10,8 +10,8 @@ SCANCONFIG=""
 # JA Bride
 originalCartDeployDir=$OPENSHIFT_FSW_DIR/versions/6.0/deployments
 JBOSS_BPM_SOA_HOME=/opt/jboss_bpm_soa/jboss-eap-6.1
-OS_BIZ_CENTRAL_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/business-central.war
-OS_DASHBUILDER_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/dashbuilder.war
+OS_SRAMP_SERVER_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-server.war
+OS_SRAMP_UI_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-ui.war
 
 source $FSW_BIN_DIR/util
 
@@ -315,6 +315,13 @@ function deploy() {
     if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
         rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
     fi
+
+    # 6) copy s-ramp web apps from it's original RPM'd location
+    cp -r $OS_SRAMP_SERVER_PATH $FSW_DEPLOYMENTS_DIR
+    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-server.war.dodeploy
+
+    cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
+    echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
 
 }
 
