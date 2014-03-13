@@ -10,9 +10,11 @@ SCANCONFIG=""
 # JA Bride
 originalCartDeployDir=$OPENSHIFT_FSW_DIR/versions/6.0/deployments
 JBOSS_BPM_SOA_HOME=/opt/jboss_bpm_soa/jboss-eap-6.1
+OS_OVERLORD_COMMONS_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/overlord-commons-idp.war
 OS_SRAMP_SERVER_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-server.war
 OS_SRAMP_UI_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-ui.war
-OS_OVERLORD_COMMONS_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/overlord-commons-idp.war
+OS_DTGOV_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/dtgov.war
+OS_DTGOV_UI_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/dtgov-ui.war
 
 source $FSW_BIN_DIR/util
 
@@ -326,6 +328,12 @@ function deploy() {
 
     cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
     echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
+
+    cp -r $OS_DTGOV_PATH $FSW_DEPLOYMENTS_DIR
+    echo > $FSW_DEPLOYMENTS_DIR/dtgov.war.dodeploy
+
+    cp -r $OS_DTGOV_UI_PATH $FSW_DEPLOYMENTS_DIR
+    echo > $FSW_DEPLOYMENTS_DIR/dtgov-ui.war.dodeploy
 
 }
 

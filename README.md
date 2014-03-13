@@ -45,7 +45,6 @@ TEST
 --------------------
     
     
-TODO
-----
-1)  Upgrade to OSE cartridge specification 2.0
-2)  MySQL cartridge should be an automatic child dependency such that steps 10 and 11 are eliminated.
+== TODO
+. Currently, universal userId/passwd for all FSW functionality is:   fswAdmin / jb0ssredhat!
+** how would management of these credentials works in a cartridge considering there is a Vault and SAML tokens generated ?
