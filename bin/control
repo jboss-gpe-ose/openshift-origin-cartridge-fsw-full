@@ -327,10 +327,9 @@ function deploy() {
     cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
 
     cp -r $OS_DTGOV_PATH $FSW_DEPLOYMENTS_DIR
-    cp $OPENSHIFT_FSW_DIR/versions/$version/conf/dtgov-persistence.xml $FSW_DEPLOYMENTS_DIR/dtgov.war/WEB-INF/classes/META-INF/persistence.xml
+    cp $OPENSHIFT_FSW_DIR/filtered/dtgov-persistence.xml $FSW_DEPLOYMENTS_DIR/dtgov.war/WEB-INF/classes/META-INF/persistence.xml
 
     cp -r $OS_DTGOV_UI_PATH $FSW_DEPLOYMENTS_DIR
-
 
 }
 
