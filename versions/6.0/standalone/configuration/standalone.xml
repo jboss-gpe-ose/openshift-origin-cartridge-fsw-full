@@ -54,6 +54,15 @@
         <path path="${env.OPENSHIFT_FSW_DIR}standalone/configuration/" name="eapConfigDir"/>
     </paths>
 
+    <vault>
+        <vault-option name="KEYSTORE_URL" value="${jboss.server.config.dir}/vault.keystore"/>
+        <vault-option name="KEYSTORE_PASSWORD" value="MASK-3o/6mE0MUvLPJYBFIEGsy/"/>
+        <vault-option name="KEYSTORE_ALIAS" value="vault"/>
+        <vault-option name="SALT" value="8675309K"/>
+        <vault-option name="ITERATION_COUNT" value="50"/>
+        <vault-option name="ENC_FILE_DIR" value="${jboss.home.dir}/vault"/>
+    </vault>
+
     <management>
 
         <!-- JA Bride :  added 'ApplicationRealm' back to this config -->
@@ -459,7 +468,7 @@
                         <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule" flag="required"/>
                     </authentication>
                 </security-domain>
-                <!--security-domain name="overlord-jaxrs" cache-type="default">
+                <security-domain name="overlord-jaxrs" cache-type="default">
                     <authentication>
                         <login-module code="org.overlord.commons.auth.jboss7.SAMLBearerTokenLoginModule" flag="sufficient">
                             <module-option name="allowedIssuers" value="/s-ramp-ui,/dtgov,/dtgov-ui,/gadget-web,/bpel-console"/>
@@ -473,7 +482,7 @@
                             <module-option name="password-stacking" value="useFirstPass"/>
                         </login-module>
                     </authentication>
-                </security-domain -->
+                </security-domain>
             </security-domains>
 
         </subsystem>
