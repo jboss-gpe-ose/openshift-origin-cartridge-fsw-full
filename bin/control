@@ -430,7 +430,6 @@ function stop() {
 
     # 1)  start by undeploying any fsw webs and related configs
     #rm -rf $FSW_DEPLOYMENTS_DIR/business-central*.war*
-    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-remove.cli
 
     if [ -f "$FSW_PID_FILE" ]; then
       echo "Stopping $cartridge_type cartridge"

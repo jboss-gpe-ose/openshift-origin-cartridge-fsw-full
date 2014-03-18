@@ -1,4 +1,0 @@
-# System Properties
-if (outcome == success) of /system-property=org.apache.cxf.stax.allowInsecureParser:read-attribute(name=value)
-    /system-property=org.apache.cxf.stax.allowInsecureParser/:remove()
-end-if
