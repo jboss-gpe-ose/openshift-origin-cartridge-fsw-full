@@ -634,7 +634,7 @@
         </subsystem>
 
         <subsystem xmlns="urn:jboss:domain:modeshape:1.0">
-            <repository name="sramp" cache-name="sramp" cache-container="modeshape" security-domain="overlord-idp" anonymous-roles="readonly" use-anonymous-upon-failed-authentication="false"/>
+            <repository name="sramp" cache-name="sramp" cache-container="modeshape" security-domain="overlord-idp" anonymous-roles="readonly"/>
         </subsystem>
     </profile>
 
