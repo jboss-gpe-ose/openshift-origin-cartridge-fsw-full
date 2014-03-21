@@ -36,8 +36,7 @@
         <!-- JA Bride:  adding fsw deps -->
         <extension module="org.switchyard"/>
 
-        <!-- add back in once sramp modules are added in ITOS -->
-        <!-- extension module="org.modeshape"/ -->
+        <extension module="org.modeshape"/>
     </extensions>
     
     <system-properties>
