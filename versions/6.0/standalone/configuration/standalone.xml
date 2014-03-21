@@ -520,7 +520,7 @@
                     <authentication>
                         <login-module code="org.overlord.commons.auth.jboss7.SAMLBearerTokenLoginModule" flag="sufficient">
                             <module-option name="allowedIssuers" value="/s-ramp-ui,/dtgov,/dtgov-ui,/gadget-web,/bpel-console"/>
-                            <module-option name="signatureRequired" value="true"/>
+                            <module-option name="signatureRequired" value="false"/>
                             <module-option name="keystorePath" value="${jboss.server.config.dir}/overlord-saml.keystore"/>
                             <module-option name="keystorePassword" value="${VAULT::vault::saml-keystore.password::1}"/>
                             <module-option name="keyAlias" value="overlord"/>
