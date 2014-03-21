@@ -331,9 +331,9 @@ function deploy() {
 
     cp -r $OS_DTGOV_PATH $FSW_DEPLOYMENTS_DIR
     cp $OPENSHIFT_FSW_DIR/filtered/dtgov-persistence.xml $FSW_DEPLOYMENTS_DIR/dtgov.war/WEB-INF/classes/META-INF/persistence.xml
-    cp $OPENSHIFT_FSW_DIR/filtered/org.overlord.dtgov.ui.server.api.properties $FSW_DEPLOYMENTS_DIR/dtgov.war/WEB-INF/classes/META-INF/config/
 
     cp -r $OS_DTGOV_UI_PATH $FSW_DEPLOYMENTS_DIR
+    cp $OPENSHIFT_FSW_DIR/filtered/org.overlord.dtgov.ui.server.api.properties $FSW_DEPLOYMENTS_DIR/dtgov-ui.war/WEB-INF/classes/META-INF/config/
 
     cp -r $OS_BPEL_SERVER_PATH $FSW_DEPLOYMENTS_DIR
 
