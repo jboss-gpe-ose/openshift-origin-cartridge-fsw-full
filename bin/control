@@ -11,6 +11,7 @@ SCANCONFIG=""
 originalCartDeployDir=$OPENSHIFT_FSW_DIR/versions/6.0/deployments
 JBOSS_BPM_SOA_HOME=/opt/jboss_bpm_soa/jboss-eap-6.1
 OS_OVERLORD_COMMONS_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/overlord-commons-idp.war
+OS_OVERLORD_RTGOV=$JBOSS_BPM_SOA_HOME/standalone/deployments/overlord-rtgov.war
 OS_SRAMP_SERVER_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-server.war
 OS_SRAMP_UI_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-ui.war
 OS_DTGOV_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/dtgov.war
@@ -318,7 +319,8 @@ function deploy() {
     # and delete any files in $FSW_DEPLOYMENTS_DIR that don't exist in
     # repo/deployments
     if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
-        rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
+        #rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
+        rsync -r  --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
     fi
 
     # 6) copy s-ramp web apps from it's original RPM'd location
@@ -335,9 +337,11 @@ function deploy() {
     cp -r $OS_DTGOV_UI_PATH $FSW_DEPLOYMENTS_DIR
     cp $OPENSHIFT_FSW_DIR/filtered/org.overlord.dtgov.ui.server.api.properties $FSW_DEPLOYMENTS_DIR/dtgov-ui.war/WEB-INF/classes/META-INF/config/
 
-    cp -r $OS_BPEL_SERVER_PATH $FSW_DEPLOYMENTS_DIR
+    cp -r $OS_OVERLORD_RTGOV $FSW_DEPLOYMENTS_DIR
 
-    cp -r $OS_BPEL_PATH $FSW_DEPLOYMENTS_DIR
+    #cp -r $OS_BPEL_SERVER_PATH $FSW_DEPLOYMENTS_DIR
+
+    #cp -r $OS_BPEL_PATH $FSW_DEPLOYMENTS_DIR
 
     startFSWwebs
 }
