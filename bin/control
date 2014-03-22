@@ -354,11 +354,11 @@ function startFSWwebs() {
     echo > $FSW_DEPLOYMENTS_DIR/dtgov-ui.war.dodeploy
     #echo > $FSW_DEPLOYMENTS_DIR/switchyard-bpel-console-server.war.dodeploy
     #echo > $FSW_DEPLOYMENTS_DIR/switchyard-bpel-console.war.dodeploy
-    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/gadgets.war.deployed 
-    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/gadget-web.war.deployed
-    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov-acs.war.deployed
-    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov-epn.war.deployed
-    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov.war.deployed
+    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/gadgets.war.dodeployed 
+    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/gadget-web.war.dodeployed
+    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov-acs.war.dodeployed
+    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov-epn.war.dodeployed
+    echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov.war.dodeployed
 }
 
 function replace_mysql_envs() {
