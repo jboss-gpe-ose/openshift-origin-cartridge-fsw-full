@@ -40,12 +40,7 @@
     </extensions>
     
     <system-properties>
-       <property name="org.apache.coyote.http11.Http11Protocol.COMPRESSION" value="on"/>
-
-       <!-- JA Bride -->
-       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-       <property name="hibernate.hbm2ddl.auto" value="update"/>
-
+        <property name="hibernate.dialect_resolvers" value="org.jboss.hibernate.customresolvers.MySQL5InnoDBDialectResolver"/>
     </system-properties>
 
     <!-- JA Bride -->
