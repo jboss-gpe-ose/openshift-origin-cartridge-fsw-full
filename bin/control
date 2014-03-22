@@ -316,10 +316,7 @@ function deploy() {
 
 
     # if repo/deployments has any files in it, sync them to $FSW_DEPLOYMENTS_DIR
-    # and delete any files in $FSW_DEPLOYMENTS_DIR that don't exist in
-    # repo/deployments
     if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
-        #rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
         rsync -r  --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
     fi
 
@@ -439,9 +436,6 @@ function start() {
 }
 
 function stop() {
-
-    # 1)  start by undeploying any fsw webs and related configs
-    #rm -rf $FSW_DEPLOYMENTS_DIR/business-central*.war*
 
     if [ -f "$FSW_PID_FILE" ]; then
       echo "Stopping $cartridge_type cartridge"
