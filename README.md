@@ -37,7 +37,7 @@ INITIAL SETUP
 8.  Delete any previous fsw related OSE applications that you may have previously created:
       rhc app delete -a fswtest
 9.  Create the *full* FSW6 *full* OSE application and add to it a mysql cartridge:
-        rhc create-app fsw0 https://raw.github.com/jboss-gpe-ose/openshift-origin-cartridge-fsw-full/master/metadata/manifest.yml mysql -g medium --no-git
+        rhc app create fsw0 https://raw.github.com/jboss-gpe-ose/openshift-origin-cartridge-fsw-full/master/metadata/manifest.yml mysql -g fsw_medium --no-git
 
 
 
