@@ -40,7 +40,8 @@
     </extensions>
     
     <system-properties>
-        <property name="hibernate.dialect_resolvers" value="org.jboss.hibernate.customresolvers.MySQL5InnoDBDialectResolver"/>
+        <!-- property name="hibernate.dialect_resolvers" value="org.jboss.hibernate.customresolvers.MySQL5InnoDBDialectResolver"/ -->
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
     </system-properties>
 
     <!-- JA Bride -->
