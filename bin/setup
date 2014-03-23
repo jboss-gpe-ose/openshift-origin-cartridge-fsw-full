@@ -9,7 +9,11 @@ esac
 mkdir -p ${OPENSHIFT_FSW_DIR}/{bin,template,standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data}
 
 # Copy the version specific files up to jbosseap directory
+# JA Bride:  NOTE:  this causes the standalone.xml from app's git repo to over-ride an existing standalone.xml
+#            this is a problem in scenarious where making modifications to the actual runtime standalone.xml (ie: via the port-forwarded JBoss Management Console)
+#            what this implies is that the system of record for your standalone.xml is always the version that is in the app's git repo
 cp -r ${OPENSHIFT_FSW_DIR}/versions/${version}/standalone/configuration/* ${OPENSHIFT_FSW_DIR}/standalone/configuration
+
 cp ${OPENSHIFT_FSW_DIR}/versions/${version}/bin/* ${OPENSHIFT_FSW_DIR}/bin
 
 # Initialize the JBoss CLI history file
