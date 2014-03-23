@@ -340,6 +340,9 @@ function deploy() {
 
     #cp -r $OS_BPEL_PATH $FSW_DEPLOYMENTS_DIR
 
+    #JA Bride:  FSW course specific
+    cp $OPENSHIFT_FSW_DIR/filtered/sts-client.properties $OPENSHIFT_FSW_DIR/standalone/configuration
+
     startFSWwebs
 }
 
