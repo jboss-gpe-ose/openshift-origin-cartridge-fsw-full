@@ -275,16 +275,18 @@ function build() {
 }
 
 function deploy() {
-  echo "Deploying $cartridge_type cartridge"
+    echo "Deploying $cartridge_type cartridge"
 
-    # 1)  copy configuration files to "filtered" location
-    replace_global_envs
+    # if repo/deployments has any files in it, sync them to $FSW_DEPLOYMENTS_DIR
+    if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
+        rsync -r  --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
+    fi
 
-    # 2)  execute fsw related modifications to jboss
-        $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
 
-    #JA Bride
-    # no point in attempting mysql related configurs for fsw web archives if database is not up
+    # JA Bride:  execute fsw related modifications to jboss
+    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
+
+    # JA Bride:  no point in attempting mysql related configurs for fsw web archives if database is not up
     if ! isdbup; then
         echo "Timed out waiting for database listener port ... will use H2"
     else
@@ -307,38 +309,7 @@ function deploy() {
 
           mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p fsw -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $sqldir/riftsaw-dao-jpa.ode-bpel.MySQL5InnoDBDialect.sql
         fi
-
-        # 4)  execute mysql related modifications to jboss
-        #replace_mysql_envs
-        #$OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/mysql-add.cli
-
     fi
-
-
-    # if repo/deployments has any files in it, sync them to $FSW_DEPLOYMENTS_DIR
-    if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
-        rsync -r  --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
-    fi
-
-    # 6) copy s-ramp web apps from it's original RPM'd location
-    cp -r $OS_OVERLORD_COMMONS_PATH $FSW_DEPLOYMENTS_DIR
-
-    cp -r $OS_SRAMP_SERVER_PATH $FSW_DEPLOYMENTS_DIR
-
-    cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
-    cp $OPENSHIFT_FSW_DIR/filtered/org.overlord.sramp.ui.server.api.properties $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war/WEB-INF/classes/META-INF/config/
-
-    cp -r $OS_DTGOV_PATH $FSW_DEPLOYMENTS_DIR
-    cp $OPENSHIFT_FSW_DIR/filtered/dtgov-persistence.xml $FSW_DEPLOYMENTS_DIR/dtgov.war/WEB-INF/classes/META-INF/persistence.xml
-
-    cp -r $OS_DTGOV_UI_PATH $FSW_DEPLOYMENTS_DIR
-    cp $OPENSHIFT_FSW_DIR/filtered/org.overlord.dtgov.ui.server.api.properties $FSW_DEPLOYMENTS_DIR/dtgov-ui.war/WEB-INF/classes/META-INF/config/
-
-    cp -r $OS_OVERLORD_RTGOV $FSW_DEPLOYMENTS_DIR
-
-    #cp -r $OS_BPEL_SERVER_PATH $FSW_DEPLOYMENTS_DIR
-
-    #cp -r $OS_BPEL_PATH $FSW_DEPLOYMENTS_DIR
 
     #JA Bride:  FSW course specific
     cp $OPENSHIFT_FSW_DIR/filtered/sts-client.properties $OPENSHIFT_FSW_DIR/standalone/configuration
@@ -352,13 +323,15 @@ function startFSWwebs() {
     echo > $FSW_DEPLOYMENTS_DIR/s-ramp-ui.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/dtgov.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/dtgov-ui.war.dodeploy
-    #echo > $FSW_DEPLOYMENTS_DIR/switchyard-bpel-console-server.war.dodeploy
-    #echo > $FSW_DEPLOYMENTS_DIR/switchyard-bpel-console.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/gadgets.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/gadget-web.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov-acs.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov-epn.war.dodeploy
     echo > $FSW_DEPLOYMENTS_DIR/overlord-rtgov/overlord-rtgov.war.dodeploy
+
+    # Not needed for FSW course
+    #echo > $FSW_DEPLOYMENTS_DIR/switchyard-bpel-console-server.war.dodeploy
+    #echo > $FSW_DEPLOYMENTS_DIR/switchyard-bpel-console.war.dodeploy
 }
 
 function replace_mysql_envs() {
@@ -373,18 +346,6 @@ function replace_mysql_envs() {
         sed -i -e "s/\${env.OPENSHIFT_APP_NAME}/$OPENSHIFT_APP_NAME/g" $f
     done
 }
-
-function replace_global_envs() {
-    # filter of substitution variables for various config files
-    # note the use of different delimiters for sed since some data (ie:  path variables) include special characters that conflict with delimiter
-    for f in ${OPENSHIFT_FSW_DIR}/filtered/*.*
-    do
-        sed -i -e "s/\${env.OPENSHIFT_FSW_IP}/$OPENSHIFT_FSW_IP/g" $f
-        sed -i -e "s@\${env.deployDir}@$OPENSHIFT_FSW_DIR/versions/$version/deployments@" $f
-        sed -i -e "s@\${env.OPENSHIFT_DATA_DIR}@$OPENSHIFT_DATA_DIR@g" $f
-    done
-}
-
 
 # Check if the server http port is up
 function isdbup() {
