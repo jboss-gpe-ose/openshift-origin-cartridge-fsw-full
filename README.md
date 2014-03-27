@@ -14,14 +14,14 @@ Details
 -------
 * This cartridge relies on RPMs.  In particular:
 
-1. [an RPM](https://github.com/jboss-gpe-ose/jboss_bpm_soa_rpmbuild) that pre-installs JBoss EAP 6.1.1 on an Openshift Enterprise _node_.  NOTE:  This cartridge does not rely on the JBoss EAP available through the jbappplatform channel of the Red Hat Network.  The release cycle of JBoss EAP from that channel is not in sync with releases of FSW.  ie:  to-date, the version of EAP available from the jbappplatform channel is 6.2.  FSW6 has a hard-requirement on EAP 6.1.1 specifically.
-2. [an RPM](https://github.com/jboss-gpe-ose/fsw_rpmbuild)  that pre-installs FSW6 modules and web artifacts on an Openshift Enterprise _node_.
+. [an RPM](https://github.com/jboss-gpe-ose/jboss_bpm_soa_rpmbuild) that pre-installs JBoss EAP 6.1.1 on an Openshift Enterprise _node_.  NOTE:  This cartridge does not rely on the JBoss EAP available through the jbappplatform channel of the Red Hat Network.  The release cycle of JBoss EAP from that channel is not in sync with releases of FSW.  ie:  to-date, the version of EAP available from the jbappplatform channel is 6.2.  FSW6 has a hard-requirement on EAP 6.1.1 specifically.
+. [an RPM](https://github.com/jboss-gpe-ose/fsw_rpmbuild)  that pre-installs FSW6 modules and web artifacts on an Openshift Enterprise _node_.
 
 
-The size of EAP 6.1.1 + FSW6  makes bundling of all of this within this downloadable cartridge impratical.  Because of the use of custom RPMs, this cartridge will only work on those Openshift Enterprise environments that have installed these custom RPMs.  Subsequently, this cartridge will not currently work on Openshift Online.  The medium term strategy is that these RPMs would eventually be added to a yet to be created FSW _channel_ on the Red Hat Network.
+The size of EAP 6.1.1 + FSW6  makes bundling of all of this within this downloadable cartridge impratical.  Because of the use of custom RPMs, this cartridge will only work on those Openshift Enterprise environments that have installed these custom RPMs.  Subsequently, this cartridge will not currently work on Openshift Online.
 
 * This cartridge relies on the MySQL database provided by the OSE MySQL cartridge.
-* In particular, MySQL is used to maintain both bpel, jbpm, rtgov and sramp databases
+* In particular, MySQL is used to maintain the jbpm, rtgov and sramp and bpel databases
 * This cartridge adheres to the OSE 1.2 cartridge specification.
 
   
