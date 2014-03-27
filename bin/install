@@ -19,7 +19,6 @@ ln -s ${OPENSHIFT_FSW_DIR}/standalone/log ${OPENSHIFT_FSW_DIR}/logs
 shopt -s dotglob
 cp -r ${OPENSHIFT_FSW_DIR}/versions/${version}/template/* ${OPENSHIFT_FSW_DIR}/template
 cp -r ${OPENSHIFT_FSW_DIR}/versions/${version}/template/.openshift ${OPENSHIFT_FSW_DIR}/template
-cp ${OPENSHIFT_FSW_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_FSW_DIR}/template/.openshift/config
 
 sed -i "s/{APP_NAME}/${OPENSHIFT_APP_NAME}/g" ${OPENSHIFT_FSW_DIR}/template/pom.xml
 
@@ -86,5 +85,6 @@ done
 # What this implies is that the system of record for your standalone.xml is always the version that is in the app's git repo
 # With this next command , the initial standalone.xml template is copied to standalone/configuration only once during install
 cp $OPENSHIFT_FSW_DIR/filtered/standalone.xml $OPENSHIFT_FSW_DIR/standalone/configuration
+cp $OPENSHIFT_FSW_DIR/filtered/standalone.xml ${OPENSHIFT_FSW_DIR}/template/.openshift/config
 
 
