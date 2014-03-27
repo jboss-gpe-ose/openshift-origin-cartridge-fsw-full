@@ -50,6 +50,7 @@ cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered
 
 # JABride:  copy s-ramp web apps from it's original RPM'd location
 JBOSS_BPM_SOA_HOME=/opt/jboss_bpm_soa/jboss-eap-6.1
+FSW_DEPLOYMENTS_DIR=${OPENSHIFT_FSW_DIR}/standalone/deployments
 OS_OVERLORD_COMMONS_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/overlord-commons-idp.war
 OS_OVERLORD_RTGOV=$JBOSS_BPM_SOA_HOME/standalone/deployments/overlord-rtgov
 OS_SRAMP_SERVER_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/s-ramp-server.war
