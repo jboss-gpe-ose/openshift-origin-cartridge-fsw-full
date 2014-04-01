@@ -81,3 +81,7 @@ do
     sed -i -e "s@\${env.deployDir}@$OPENSHIFT_FSW_DIR/versions/$version/deployments@" $f
     sed -i -e "s@\${env.OPENSHIFT_DATA_DIR}@$OPENSHIFT_DATA_DIR@g" $f
 done
+
+# JA Bride
+# create an application specific JBoss modules path
+mkdir -p $OPENSHIFT_DATA_DIR/appModules
