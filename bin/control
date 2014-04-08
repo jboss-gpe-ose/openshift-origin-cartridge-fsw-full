@@ -393,7 +393,9 @@ function start() {
       exit 1
     fi
 
-    waitondeployments
+    # JA Bride:  this seems to be causing OOM errors during automatic unidling of gear
+    # it instantiates a 2nd java process on the gear that invokes the EAP deployment-scanner via CLI
+    # waitondeployments
   fi
 
     deploy
