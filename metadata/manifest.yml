@@ -100,7 +100,7 @@ Endpoints:
     Public-Port-Name:  HTTP_PROXY_PORT
     Mappings:
       - Frontend:      "fsw"
-        Backend:       "fsw"
+        Backend:       ""
         Options:       { "websocket": 1}
       - Frontend:      "/health"
         Backend:       ""
@@ -130,7 +130,7 @@ Endpoints:
     Public-Port-Name:  ADMIN_PROXY_PORT
     Mappings:
       - Frontend:      ""
-        Backend:       ""
+        Backend:       "console"
     
 Additional-Control-Actions:
     - threaddump
