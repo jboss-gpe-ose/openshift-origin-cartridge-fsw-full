@@ -99,8 +99,8 @@ Endpoints:
     Private-Port:      8080
     Public-Port-Name:  HTTP_PROXY_PORT
     Mappings:
-      - Frontend:      ""
-        Backend:       ""
+      - Frontend:      "fsw"
+        Backend:       "fsw"
         Options:       { "websocket": 1}
       - Frontend:      "/health"
         Backend:       ""
@@ -129,8 +129,8 @@ Endpoints:
     Private-Port: 9990
     Public-Port-Name:  ADMIN_PROXY_PORT
     Mappings:
-      - Frontend:      "admin"
-        Backend:       "admin"
+      - Frontend:      ""
+        Backend:       ""
     
 Additional-Control-Actions:
     - threaddump
