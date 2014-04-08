@@ -130,7 +130,7 @@ Endpoints:
     Public-Port-Name:  ADMIN_PROXY_PORT
     Mappings:
       - Frontend:      "admin"
-        Backend:       ""
+        Backend:       "admin"
     
 Additional-Control-Actions:
     - threaddump
