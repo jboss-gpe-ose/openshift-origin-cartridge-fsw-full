@@ -131,6 +131,8 @@ Endpoints:
     Mappings:
       - Frontend:      "management"
         Backend:       "management"
+      - Frontend:      "console"
+        Backend:       "console"
     
 Additional-Control-Actions:
     - threaddump
