@@ -275,7 +275,7 @@ function build() {
 }
 
 function deploy() {
-    echo "Deploying $cartridge_type cartridge"
+    echo "Deploying $cartridge_type cartridge" >> $OPENSHIFT_DATA_DIR/control.log
 
     # if repo/deployments has any files in it, sync them to $FSW_DEPLOYMENTS_DIR
     if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
@@ -372,6 +372,7 @@ function isdbup() {
 
 
 function start() {
+  echo "Starting $cartridge_type cartridge" > $OPENSHIFT_DATA_DIR/control.log
 
 
   if marker_present "enable_jpda"; then
