@@ -44,10 +44,6 @@ update-configuration java7
 mkdir -p ${OPENSHIFT_FSW_DIR}/filtered
 cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered
 
-# copy any project CLI files to filtered directory
-mkdir -p ${OPENSHIFT_FSW_DIR}/filtered
-cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered
-
 # JABride:  copy s-ramp web apps from it's original RPM'd location
 JBOSS_BPM_SOA_HOME=/opt/jboss_bpm_soa/jboss-eap-6.1
 FSW_DEPLOYMENTS_DIR=${OPENSHIFT_FSW_DIR}/standalone/deployments
