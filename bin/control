@@ -282,10 +282,6 @@ function deploy() {
         rsync -r  --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $FSW_DEPLOYMENTS_DIR
     fi
 
-
-    # JA Bride:  execute fsw related modifications to jboss
-    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
-
     # JA Bride:  no point in attempting mysql related configurs for fsw web archives if database is not up
     if ! isdbup; then
         echo "Timed out waiting for database listener port ... will use H2"
