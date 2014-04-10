@@ -60,6 +60,16 @@ OS_DTGOV_UI_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/dtgov-ui.war
 OS_BPEL_SERVER_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/switchyard-bpel-console-server.war
 OS_BPEL_PATH=$JBOSS_BPM_SOA_HOME/standalone/deployments/switchyard-bpel-console.war
 
+# JA Bride
+# filter of substitution variables for various config files
+# note the use of different delimiters for sed since some data (ie:  path variables) include special characters that conflict with delimiter
+for f in ${OPENSHIFT_FSW_DIR}/filtered/*.*
+do
+    sed -i -e "s/\${env.OPENSHIFT_FSW_IP}/$OPENSHIFT_FSW_IP/g" $f
+    sed -i -e "s@\${env.deployDir}@$OPENSHIFT_FSW_DIR/versions/$version/deployments@" $f
+    sed -i -e "s@\${env.OPENSHIFT_DATA_DIR}@$OPENSHIFT_DATA_DIR@g" $f
+done
+
 cp -r $OS_OVERLORD_COMMONS_PATH $FSW_DEPLOYMENTS_DIR
 cp -r $OS_SRAMP_SERVER_PATH $FSW_DEPLOYMENTS_DIR
 cp -r $OS_SRAMP_UI_PATH $FSW_DEPLOYMENTS_DIR
@@ -71,16 +81,6 @@ cp $OPENSHIFT_FSW_DIR/filtered/org.overlord.dtgov.ui.server.api.properties $FSW_
 cp -r $OS_OVERLORD_RTGOV $FSW_DEPLOYMENTS_DIR
 cp -r $OS_BPEL_SERVER_PATH $FSW_DEPLOYMENTS_DIR
 cp -r $OS_BPEL_PATH $FSW_DEPLOYMENTS_DIR
-
-# JA Bride
-# filter of substitution variables for various config files
-# note the use of different delimiters for sed since some data (ie:  path variables) include special characters that conflict with delimiter
-for f in ${OPENSHIFT_FSW_DIR}/filtered/*.*
-do
-    sed -i -e "s/\${env.OPENSHIFT_FSW_IP}/$OPENSHIFT_FSW_IP/g" $f
-    sed -i -e "s@\${env.deployDir}@$OPENSHIFT_FSW_DIR/versions/$version/deployments@" $f
-    sed -i -e "s@\${env.OPENSHIFT_DATA_DIR}@$OPENSHIFT_DATA_DIR@g" $f
-done
 
 # JA Bride
 # create an application specific JBoss modules path
