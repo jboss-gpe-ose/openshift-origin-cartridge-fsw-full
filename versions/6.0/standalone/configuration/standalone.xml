@@ -395,6 +395,15 @@
                     <netty-acceptor name="netty" socket-binding="messaging" />
                     <in-vm-acceptor name="in-vm" server-id="0" />
                 </acceptors>
+
+                <!-- JA Bride:  allow for fswAdmin user to send/consume messages by default -->
+                <security-settings>
+                    <security-setting match="#">
+                        <permission type="send" roles="admin"/>
+                        <permission type="consume" roles="admin"/>
+                        <permission type="manage" roles="admin"/>
+                    </security-setting>
+                </security-settings>
                 
                 <address-settings>
                     <!--default for catch all -->
