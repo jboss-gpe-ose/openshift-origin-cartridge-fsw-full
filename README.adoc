@@ -1,0 +1,19 @@
+:cartdoc: link:doc/cart_doc.adoc[cartridge documentation]
+
+
+
+
+iPaaS Openshift Cartridge using FSW
+===================================
+
+== Overview
+
+* Provides an Openshift Enterprise (OSE) cartridge with full suite of Red Hat Fuse Service Works functionality.  
+* A view of the deployment architecture of a gear using this cartridge can be found [here.](https://raw.github.com/jboss-gpe-ose/openshift-origin-cartridge-fsw-full/master/doc/images/bpmPaaS-standalone-deployment-architecture.png)
+* This cartridge is essentially a fork of the OSE jbosseap cartridge.
+  Subsequently, most of administration guidelines documented in the jbosseap cartridge apply to this cartridge.
+* As of 10 Feb. 2014, the version of FSW 6 used is from :  jboss-fsw-installer-6.0.0.GA-redhat-4.jar
+
+
+== SETUP
+      rhc app create fsw0 https://raw.github.com/jboss-gpe-ose/openshift-origin-cartridge-fsw-full/master/metadata/manifest.yml mysql -g fsw_medium --no-git --noprompt
