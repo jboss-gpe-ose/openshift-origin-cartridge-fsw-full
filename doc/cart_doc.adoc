@@ -14,7 +14,7 @@ image::images/rhheader.png[width=900]
 
 == Summary:
 
-. This project provides a community developed Openshift Enterprise 2.0 cartridge for Red Hat JBoss Fuse Service Works.
+. This project provides a community developed Openshift Enterprise 2.* cartridge for Red Hat JBoss Fuse Service Works.
 This  _downloadable_ cartridge will only work in on-premise Openshift Enterprise environments where a few custom, non-Red Hat-supported "ghetto" RPMs can be installed.  
 So, for instance, this cartridge will not work on any service plan offered by Openshift Online.
 . The purpose of these custom, non-supported RPMs that this FSW cartridge depends on is to pre-install JBoss EAP6.1.1 and FSW on each Openshift node.  
@@ -29,18 +29,22 @@ FSW has a hard-requirement on EAP 6.1.1 specifically.
 Please contact your Red Hat sales representative for more details regarding these supported options.
 . This cartridge assumes co-installation of the mysql Openshift cartridge.  
 Subsequently, FSW is configured to leverage mysql rather than H2.
+. The JBoss EAP Management Console has been mapped to port 8080 (as opposed to being mapped to the default port of 9990).
+This allows for access to the JBoss EAP Management Console without the need for port-forwarding and without authentication.
+If this is not desirable, feel free to disable this mapping of the EAP Management Console in your own fork of this cartridge.
 
 == Pre-Requisities:
-. An Openshift Enterprise 2.0 environment installed with the following custom RPMs:
+. An Openshift Enterprise 2.* environment installed with the following custom RPMs:
 .. {jbossbpmsoarpmbuild}
 .. {mysqlrpmbuild}
 .. {fswrpmbuild}
-. Your Openshift Enterprise 2.0 needs to support medium sized gears (ie:  1G of RAM and 1G of disk space per gear).  
-It's highly recommended that a district be created in your Openshift Enterprise environment so that gears can be freely moved from one node to another.
+. Your Openshift Enterprise 2.* needs to support medium sized gears (ie:  1G of RAM and 1G of disk space per gear) at the very minimum.
+This cartridge has been tested in an OSE 2.* environment where 1.2G of RAM are allocated to the FSW gear.
+. An OSE district should be created so that gears can be freely moved from one node to another.
 . {rhctools} installed in your local environment
 
 [IMPORTANT]
-Red Hat's _Partner Demonstration System_ provides Red Hat partners with freely available Openshift Enterprise environment that already meet the first two pre-requisites.
+Red Hat's _Partner Demonstration System_ provides Red Hat partners with freely available Openshift Enterprise environment that already meet the first three pre-requisites.
 If you are a Red Hat Partner, please visit {partnercenter} for more details. 
 
 == Getting Started:
@@ -56,7 +60,7 @@ rhc app create fsw0 https://raw.github.com/jboss-gpe-ose/openshift-origin-cartri
 -----
 
 [NOTE]
-when executed, this command creates a gear using the previously defined size of ext_general_medium containing both the FSW and mysql cartridges.  
+when executed, this command creates a gear using the previously defined size of _mediumplus_ containing both the FSW and mysql cartridges.  
 In addition, it does not attempt to clone the new gear's git repository to a local environment nor does it prompt you for anything else such as upload of ssh keys.
 
 === Provision via OSE Admin Console:
@@ -99,5 +103,7 @@ Using the gear info provided by Openshift, you should now be able to point your 
 http://<openshift_server_address>/console
 
 
-== Technical Topics:
+== To-Do:
+
+. DT-Gov UI is currently broken
 
